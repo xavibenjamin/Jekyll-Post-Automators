@@ -26,9 +26,11 @@ class String
   end
  
 end
+# You want to modify this to the location of you template
+TEMPLATE = "/blog-post-templates/link-template.md"
 
-TEMPLATE = "/Users/timothybsmith/Templates/blog-post-templates/link-template.md"
-POSTS_DIR = "/Users/timothybsmith/Documents/sites/ttimsmith.github.com/_drafts"
+# Change this to where ever your _drafts folder is
+POSTS_DIR = "/_drafts"
  
 # Get the title and use it to derive the new filename
 title = "{query}"
@@ -45,6 +47,6 @@ post_file = File.open(filepath, 'w')
 post_file.puts post_text
 post_file.close
 
-Dir.chdir "/Users/timothybsmith/Documents/sites/ttimsmith.github.com/_drafts"
+Dir.chdir "/_drafts"
 
 system(%[open "#{filename}"])
