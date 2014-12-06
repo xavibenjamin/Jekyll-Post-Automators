@@ -29,16 +29,28 @@ class String
 end
 
 # You want to modify this to the location of you template
-TEMPLATE = "/blog-post-templates/post-template.md"
+TEMPLATE = "/Jekyll-Post-Automaters/post-template.md"
 
 # Change this to where ever your _drafts folder is
 POSTS_DIR = "/_drafts"
 
 # Get the title and use it to derive the new filename
 title = "{query}"
-filename = "#{title.parameterize}.md"
-filepath = File.join(POSTS_DIR, filename)
+filename = "#{title.parameterize}"
 
+# Make sure the file doesn't already exist
+file_base_path = File.join(POSTS_DIR, filename)
+counter = 0
+begin
+  counter = counter + 1
+  if (counter > 1)
+    # Counter is above 1, to try appending a number
+    filepath = file_base_path + "-" + counter.to_s + ".markdown"
+  else
+    # First time through this loop: don't use a number on the filename
+    filepath = file_base_path + ".markdown"
+  end
+end while File.exists?(filepath)
 
 # Load in the template and set the title
 post_text = File.read(TEMPLATE)
@@ -49,6 +61,5 @@ post_file = File.open(filepath, 'w')
 post_file.puts post_text
 post_file.close
 
-Dir.chdir POSTS_DIR
-
-system(%[open "#{filename}"])
+# Open File in Text Editor
+system(%[open "#{filepath}"])
