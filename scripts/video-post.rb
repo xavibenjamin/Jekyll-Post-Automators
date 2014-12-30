@@ -45,10 +45,10 @@ begin
   counter = counter + 1
   if (counter > 1)
     # Counter is above 1, to try appending a number
-    filepath = file_base_path + "-" + counter.to_s + ".markdown"
+    filepath = file_base_path + "-" + counter.to_s + ".md"
   else
     # First time through this loop: don't use a number on the filename
-    filepath = file_base_path + ".markdown"
+    filepath = file_base_path + ".md"
   end
 end while File.exists?(filepath)
 
